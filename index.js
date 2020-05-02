@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @module ReactToAngularJs
  * @author Guima Ferreira
