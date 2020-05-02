@@ -52,6 +52,16 @@ class MyController {
          this.name = "Bill";
      }
 }
+// Or do this:
+class MyController {
+     constructor() {
+         this.name = "William";
+     }
+
+     onChange = () => {
+         this.name = "Bill";
+     }
+}
 ```
 <a name="module_ReactToAngularjs..R2AComponent"></a>
 

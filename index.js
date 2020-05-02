@@ -40,6 +40,16 @@ const reactDom = require("react-dom");
  *          this.name = "Bill";
  *      }
  * }
+ * // Or do this:
+ * class MyController {
+ *      constructor() {
+ *          this.name = "William";
+ *      }
+ *
+ *      onChange = () => {
+ *          this.name = "Bill";
+ *      }
+ * }
  */
 function R2AComponents(mod, components) {
     components = [].concat(components);
