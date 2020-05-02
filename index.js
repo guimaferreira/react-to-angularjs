@@ -8,7 +8,7 @@
 const React = require("react");
 const reactDom = require("react-dom");
 
-export const name = "ReactToAngularJs";
+module.exports.name = "R2AComponents";
 
 /**
  * Generate AngularJs Components
@@ -30,7 +30,7 @@ export const name = "ReactToAngularJs";
  *  }
  * ]
  */
-export default function R2AComponents(mod, components) {
+module.exports.R2AComponents = function (mod, components) {
     components = [].concat(components);
 
     components.forEach((component) => {
@@ -38,14 +38,14 @@ export default function R2AComponents(mod, components) {
 
         angular.module(mod).component(component.name, reactComponent);
     });
-}
+};
 
 /**
  * Returns AngularJs Component config object that renders a React Component
  * @param {Class} component React Component Class
  * @param {Array} bindingNames AngularJs Component Attributes
  */
-export function R2AComponent(component, bindingNames) {
+module.exports.R2AComponent = function (component, bindingNames) {
     bindingNames = [].concat(bindingNames);
 
     const controller = class ReactComponent {
@@ -88,7 +88,6 @@ export function R2AComponent(component, bindingNames) {
         }
 
         render(props) {
-            console.log("render");
             this.props = props;
 
             if (!this.isDestroyed)
@@ -109,4 +108,4 @@ export function R2AComponent(component, bindingNames) {
         bindings: _bindings(),
         controller: ["$element", controller],
     };
-}
+};
