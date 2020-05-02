@@ -5,7 +5,7 @@
  * @description Helps you to migrate yours AngularJs Application to React component by component
  */
 
-import React from "react";
+const React = require("react");
 const reactDom = require("react-dom");
 
 export const name = "ReactToAngularJs";
