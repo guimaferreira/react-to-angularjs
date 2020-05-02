@@ -11,6 +11,7 @@ export const name = "ReactToAngularJs";
 
 /**
  * Generate AngularJs Components
+ * @name R2AComponents
  * @param {String} mod AngularJs Module name
  * @param {Array} components collection of AngularJs Components to be generated
  * @example
