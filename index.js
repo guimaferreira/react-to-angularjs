@@ -52,32 +52,17 @@ function R2AComponent(component, bindingNames) {
             this.props = {};
         }
 
-        $onInit() {
-            const props = this._propsGet();
-            this.render(props);
+        $onChanges(changes) {
+            this.props = this._propsGet();
+            this.render();
         }
 
         _propsGet() {
             return bindingNames.reduce((r, key) => {
-                const value = this[key];
-
-                r[key] =
-                    typeof value == "function"
-                        ? () => this[key](...arguments)
-                        : value;
+                r[key] = this[key];
 
                 return r;
             }, {});
-        }
-
-        _propsCompare(props) {
-            return JSON.stringify(props) == JSON.stringify(this.props);
-        }
-
-        $doCheck(changes) {
-            const props = this._propsGet();
-
-            if (!this._propsCompare(props)) this.render(props);
         }
 
         $onDestroy() {
@@ -85,9 +70,7 @@ function R2AComponent(component, bindingNames) {
             reactDom.unmountComponentAtNode(this.$element[0]);
         }
 
-        render(props) {
-            this.props = props;
-
+        render() {
             if (!this.isDestroyed)
                 reactDom.render(
                     React.createElement(component, this.props),
@@ -98,7 +81,7 @@ function R2AComponent(component, bindingNames) {
 
     const _bindings = () =>
         bindingNames.reduce((r, key) => {
-            r[key] = "=";
+            r[key] = "<";
             return r;
         }, {});
 
