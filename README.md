@@ -1,20 +1,20 @@
-<a name="module_ReactToAngularJs"></a>
+<a name="module_ReactToAngularjs"></a>
 
-## ReactToAngularJs
+## ReactToAngularjs
 Helps you to migrate yours AngularJs Application to React component by component
 
 **Author**: Guima Ferreira  
 
-* [ReactToAngularJs](#module_ReactToAngularJs)
-    * [~R2AComponents](#module_ReactToAngularJs..R2AComponents)
-    * [~R2AComponent(component, bindingNames)](#module_ReactToAngularJs..R2AComponent)
+* [ReactToAngularjs](#module_ReactToAngularjs)
+    * [~R2AComponents(mod, components)](#module_ReactToAngularjs..R2AComponents)
+    * [~R2AComponent(component, bindingNames)](#module_ReactToAngularjs..R2AComponent)
 
-<a name="module_ReactToAngularJs..R2AComponents"></a>
+<a name="module_ReactToAngularjs..R2AComponents"></a>
 
-### ReactToAngularJs~R2AComponents
+### ReactToAngularjs~R2AComponents(mod, components)
 Generate AngularJs Components
 
-**Kind**: inner property of [<code>ReactToAngularJs</code>](#module_ReactToAngularJs)  
+**Kind**: inner method of [<code>ReactToAngularjs</code>](#module_ReactToAngularjs)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -24,7 +24,7 @@ Generate AngularJs Components
 **Example**  
 ```js
 [
- //  <my-component name="'Roger'" on-change="vm.onChange"></my-component>
+ //  <my-component name="vm.name" on-change="vm.onChange"></my-component>
  {
      name: 'myComponent',
      react: MyComponent,         // a React Component imported
@@ -37,15 +37,35 @@ Generate AngularJs Components
  }
 ]
 ```
-<a name="module_ReactToAngularJs..R2AComponent"></a>
+**Example**  
+```js
+// Attention!
+// When passing functions that change its scope,
+// you need to do bind(this) as following:
+class MyController {
+     constructor() {
+         this.name = "William";
+         this.onChange = this.onChange.bind(this);
+     }
 
-### ReactToAngularJs~R2AComponent(component, bindingNames)
+     onChange() {
+         this.name = "Bill";
+     }
+}
+```
+<a name="module_ReactToAngularjs..R2AComponent"></a>
+
+### ReactToAngularjs~R2AComponent(component, bindingNames)
 Returns AngularJs Component config object that renders a React Component
 
-**Kind**: inner method of [<code>ReactToAngularJs</code>](#module_ReactToAngularJs)  
+**Kind**: inner method of [<code>ReactToAngularjs</code>](#module_ReactToAngularjs)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | component | <code>Class</code> | React Component Class |
 | bindingNames | <code>Array</code> | AngularJs Component Attributes |
 
+**Example**  
+```js
+R2AComponent("myComponent", ['name', 'onChange']);
+```

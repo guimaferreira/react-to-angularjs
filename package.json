@@ -4,7 +4,9 @@
     "description": "Helps you to migrate yours AngularJs Application to React component by component",
     "type": "module",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "readme": "/Users/Guima/2020/opensource/react-to-angularjs/node_modules/.bin/jsdoc2md index.js > README.md"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/guimaferreira/react-to-angularjs.git"

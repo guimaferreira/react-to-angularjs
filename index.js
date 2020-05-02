@@ -1,6 +1,6 @@
 "use strict";
 /**
- * @module ReactToAngularJs
+ * @module ReactToAngularjs
  * @author Guima Ferreira
  * @description Helps you to migrate yours AngularJs Application to React component by component
  */
@@ -10,12 +10,11 @@ const reactDom = require("react-dom");
 
 /**
  * Generate AngularJs Components
- * @name R2AComponents
  * @param {String} mod AngularJs Module name
  * @param {Array} components collection of AngularJs Components to be generated
  * @example
  * [
- *  //  <my-component name="'Roger'" on-change="vm.onChange"></my-component>
+ *  //  <my-component name="vm.name" on-change="vm.onChange"></my-component>
  *  {
  *      name: 'myComponent',
  *      react: MyComponent,         // a React Component imported
@@ -27,6 +26,20 @@ const reactDom = require("react-dom");
  *      react: SimpleComponent      // a React Component imported
  *  }
  * ]
+ * @example
+ * // Attention!
+ * // When passing functions that change its scope,
+ * // you need to do bind(this) as following:
+ * class MyController {
+ *      constructor() {
+ *          this.name = "William";
+ *          this.onChange = this.onChange.bind(this);
+ *      }
+ *
+ *      onChange() {
+ *          this.name = "Bill";
+ *      }
+ * }
  */
 function R2AComponents(mod, components) {
     components = [].concat(components);
@@ -42,6 +55,8 @@ function R2AComponents(mod, components) {
  * Returns AngularJs Component config object that renders a React Component
  * @param {Class} component React Component Class
  * @param {Array} bindingNames AngularJs Component Attributes
+ * @example
+ * R2AComponent("myComponent", ['name', 'onChange']);
  */
 function R2AComponent(component, bindingNames) {
     bindingNames = [].concat(bindingNames);
