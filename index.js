@@ -12,6 +12,7 @@ const reactDom = require("react-dom");
  * Generate AngularJs Components
  * @param {String} mod AngularJs Module name
  * @param {Array} components collection of AngularJs Components to be generated
+ * @param {ReactComponent} [theme] a react component that returns <ThemeProvider>{children}</ThemProvider>
  * @example
  * [
  *  //  <my-component name="vm.name" on-change="vm.onChange"></my-component>
@@ -51,11 +52,15 @@ const reactDom = require("react-dom");
  *      }
  * }
  */
-function R2AComponents(mod, components) {
+function R2AComponents(mod, components, theme) {
     components = [].concat(components);
 
     components.forEach((component) => {
-        const reactComponent = R2AComponent(component.react, component.props);
+        const reactComponent = R2AComponent(
+            component.react,
+            component.props,
+            theme
+        );
 
         angular.module(mod).component(component.name, reactComponent);
     });
@@ -65,10 +70,11 @@ function R2AComponents(mod, components) {
  * Returns AngularJs Component config object that renders a React Component
  * @param {Class} component React Component Class
  * @param {Array} bindingNames AngularJs Component Attributes
+ * @param {ReactComponent} [theme] a react component that returns <ThemeProvider>{children}</ThemProvider>
  * @example
  * R2AComponent("myComponent", ['name', 'onChange']);
  */
-function R2AComponent(component, bindingNames) {
+function R2AComponent(component, bindingNames, theme) {
     bindingNames = [].concat(bindingNames);
 
     const controller = class ReactComponent {
@@ -96,11 +102,18 @@ function R2AComponent(component, bindingNames) {
         }
 
         render() {
-            if (!this.isDestroyed)
-                reactDom.render(
-                    React.createElement(component, this.props),
-                    this.$element[0]
+            if (!this.isDestroyed) {
+                const componentElement = React.createElement(
+                    component,
+                    this.props
                 );
+
+                const element = theme
+                    ? React.createElement(theme, {}, componentElement)
+                    : componentElement;
+
+                reactDom.render(element, this.$element[0]);
+            }
         }
     };
 

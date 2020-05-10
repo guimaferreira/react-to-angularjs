@@ -6,12 +6,12 @@ Helps you to migrate yours AngularJs Application to React component by component
 **Author**: Guima Ferreira  
 
 * [ReactToAngularjs](#module_ReactToAngularjs)
-    * [~R2AComponents(mod, components)](#module_ReactToAngularjs..R2AComponents)
-    * [~R2AComponent(component, bindingNames)](#module_ReactToAngularjs..R2AComponent)
+    * [~R2AComponents(mod, components, [theme])](#module_ReactToAngularjs..R2AComponents)
+    * [~R2AComponent(component, bindingNames, [theme])](#module_ReactToAngularjs..R2AComponent)
 
 <a name="module_ReactToAngularjs..R2AComponents"></a>
 
-### ReactToAngularjs~R2AComponents(mod, components)
+### ReactToAngularjs~R2AComponents(mod, components, [theme])
 Generate AngularJs Components
 
 **Kind**: inner method of [<code>ReactToAngularjs</code>](#module_ReactToAngularjs)  
@@ -20,6 +20,7 @@ Generate AngularJs Components
 | --- | --- | --- |
 | mod | <code>String</code> | AngularJs Module name |
 | components | <code>Array</code> | collection of AngularJs Components to be generated |
+| [theme] | <code>ReactComponent</code> | a react component that returns <ThemeProvider>{children}</ThemProvider> |
 
 **Example**  
 ```js
@@ -65,7 +66,7 @@ class MyController {
 ```
 <a name="module_ReactToAngularjs..R2AComponent"></a>
 
-### ReactToAngularjs~R2AComponent(component, bindingNames)
+### ReactToAngularjs~R2AComponent(component, bindingNames, [theme])
 Returns AngularJs Component config object that renders a React Component
 
 **Kind**: inner method of [<code>ReactToAngularjs</code>](#module_ReactToAngularjs)  
@@ -74,6 +75,7 @@ Returns AngularJs Component config object that renders a React Component
 | --- | --- | --- |
 | component | <code>Class</code> | React Component Class |
 | bindingNames | <code>Array</code> | AngularJs Component Attributes |
+| [theme] | <code>ReactComponent</code> | a react component that returns <ThemeProvider>{children}</ThemProvider> |
 
 **Example**  
 ```js
